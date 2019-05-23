@@ -42,19 +42,21 @@ namespace WC2150Server
             lock (Program.ConsoleLock)
             {
                 Console.SetCursorPosition(0, 0);
-                Console.WriteLine("################################################################");
+                Console.WriteLine(new string('#', width+2));
 
                 for (int y = 1; y <= height; y++)
                 {
+                    Console.Write("#");
+
                     for (int x = 1; x <= width; x++)
                     {
                         Console.Write(CheckCoords(x, y));
                     }
 
-                    Console.WriteLine("");
+                    Console.WriteLine("#");
                 }
 
-                Console.WriteLine("################################################################");
+                Console.WriteLine(new string('#', width+2));
             }
         }
 
@@ -64,7 +66,14 @@ namespace WC2150Server
             {
                 if(client.Value.x == x && client.Value.y == y)
                 {
-                    return Convert.ToChar(client.Key.ToString());
+                    if (client.Value.hp <= 0)
+                    {
+                        return 'X';
+                    }
+                    else
+                    {
+                        return Convert.ToChar(client.Key.ToString()[0]);
+                    }
                 }
             }
 

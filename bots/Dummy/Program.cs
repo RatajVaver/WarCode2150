@@ -9,8 +9,13 @@ namespace Dummy
     {
         static void Main(string[] args)
         {
-            Console.Write("IP: ");
-            string ip = Console.ReadLine();
+            string ip = "127.0.0.1";
+
+            if(args.Length > 0)
+            {
+                ip = args[0];
+            }
+
             Brain brain = new Brain();
             Client client = new Client(ip, 28001, brain);
         }

@@ -92,7 +92,11 @@ namespace Dummy
 
                 if (id != _myId)
                 {
-                    _brain.enemies[id].hp = 0;
+                    if (_brain.enemies.ContainsKey(id))
+                    {
+                        _brain.enemies[id].hp = 0;
+                    }
+
                     _brain.Think();
                 }
             }

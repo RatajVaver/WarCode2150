@@ -80,6 +80,7 @@ namespace WC2150Server
             if(clients[id].hp <= 0)
             {
                 SendToId( id, new byte[]{ WC2150Shared.Data.YOU_DEAD } );
+                return;
             }
 
             switch(type){
