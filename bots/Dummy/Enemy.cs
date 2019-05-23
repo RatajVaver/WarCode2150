@@ -8,11 +8,11 @@ namespace Dummy
 {
     class Enemy
     {
-        public int x;
-        public int y;
-        public int hp;
+        public ushort x;
+        public ushort y;
+        public byte hp;
 
-        public Enemy(int x, int y)
+        public Enemy(ushort x, ushort y)
         {
             this.x = x;
             this.y = y;

@@ -10,10 +10,10 @@ namespace Dummy
     class Brain
     {
         public Dictionary<int,Enemy> enemies = new Dictionary<int,Enemy>();
-        public int x;
-        public int y;
+        public ushort x;
+        public ushort y;
 
-        public void Start(int x, int y)
+        public void Start(ushort x, ushort y)
         {
             this.x = x;
             this.y = y;
@@ -60,23 +60,26 @@ namespace Dummy
                 RandomMove();
         }
 
-        public void Move(int x, int y)
+        public void Move(ushort x, ushort y)
         {
-            Client.SendMessage("MOVE;" + x + ";" + y);
+            //Client.SendMessage("MOVE;" + x + ";" + y);
+            Console.WriteLine("Moving to: " + x + ", " + y);
+            Client.SendMessage( new byte[] { WC2150Shared.Data.MOVE }.Concat(BitConverter.GetBytes(x)).Concat(BitConverter.GetBytes(y)).ToArray() );
         }
 
-        public void Shoot(int dir)
+        public void Shoot(byte dir)
         {
-            Client.SendMessage("SHOOT;" + dir);
+            //Client.SendMessage("SHOOT;" + dir);
+            Client.SendMessage(new byte[] { WC2150Shared.Data.SHOOT }.Concat(BitConverter.GetBytes(dir)).ToArray());
         }
 
         public void RandomMove()
         {
             Random rnd = new Random();
-            Move(x + rnd.Next(-1, 2), y + rnd.Next(-1, 2));
+            Move((ushort)(x + rnd.Next(-1, 2)), (ushort)(y + rnd.Next(-1, 2)));
         }
 
-        public void UpdateEnemy(int id, int x, int y)
+        public void UpdateEnemy(byte id, ushort x, ushort y)
         {
             if (enemies.ContainsKey(id))
             {
