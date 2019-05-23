@@ -62,14 +62,12 @@ namespace Dummy
 
         public void Move(ushort x, ushort y)
         {
-            //Client.SendMessage("MOVE;" + x + ";" + y);
             Console.WriteLine("Moving to: " + x + ", " + y);
             Client.SendMessage( new byte[] { WC2150Shared.Data.MOVE }.Concat(BitConverter.GetBytes(x)).Concat(BitConverter.GetBytes(y)).ToArray() );
         }
 
         public void Shoot(byte dir)
         {
-            //Client.SendMessage("SHOOT;" + dir);
             Client.SendMessage(new byte[] { WC2150Shared.Data.SHOOT }.Concat(BitConverter.GetBytes(dir)).ToArray());
         }
 
